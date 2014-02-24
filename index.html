@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Visor.js</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link href="src/player.css" rel="stylesheet">
+        <link href="src/gesturekit.help.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <section class="gk-player">
+            <h1 class="gk-player-title"></h1>
+            <h2 class="gk-player-album"></h2>
+            <div class="gk-player-time"></div>
+            <div class="gk-player-volume-container">
+                <input class="gk-player-volume" type="range" value="25" value="0" data-skin="tron" data-width="200" data-fgColor="#AAAAAA"
+data-bgColor="#FFFFFF" data-displayInput="false">
+            </div>
+        </section>
+
+        <script src="src/gesturekit.min.js"></script>
+        <script src="src/gesturekit.visor.min.js"></script>
+        <script src="src/gesturekit.help.min.js"></script>
+
+        <script src="src/player.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" ></script>
+        <script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
+
+        <script>
+
+            window.onload = function () {
+                var visor = new Visor(),
+                    help = new Help({
+                        'uid': '5a48d9b0-fc11-47ac-bf80-36636c8428cb'
+                    }),
+                    p = new Player({
+                        'volume': 25,
+                        'playlist': [{
+                            'title': 'Ilumine',
+                            'artist': 'Efflugence',
+                            'album': 'Ilumine EP',
+                            'color': '#c0392b',
+                            'src': 'https://github.com/RoamTouch/gk-player/raw/master/tracks/track01.mp3'
+                        },
+                        {
+                            'title': 'The One',
+                            'artist': 'Marsbeing ft Deniz Reno',
+                            'album': 'FutureGarage',
+                            'color': '#2980b9',
+                            'src': 'https://github.com/RoamTouch/gk-player/raw/master/tracks/track02.mp3'
+                        }]
+                    });
+
+                $(function() {
+                    $(".gk-player-volume, .knob").knob({
+                        'change': function (value) {
+                            p.volume(value);
+                        }
+                    });
+                });
+
+                gesturekit
+                    .on('GK_PLAY', function () {
+                        p.play();
+                    })
+                    .on('GK_PAUSE', function () {
+                        p.pause();
+                    })
+                    .on('GK_BLUE', function () {
+                        p.stop();
+                    })
+                    .on('GK_GREEN', function () {
+                        p.next();
+                    })
+                    .on('GK_YELLOW', function () {
+                        p.prev();
+                    })
+                    .on('GK_HELP', function () {
+                        help.show();
+                    });
+
+                gesturekit.init({
+                    'uid': '5a48d9b0-fc11-47ac-bf80-36636c8428cb'
+                });
+            };
+        </script>
+    </body>
+</html>
