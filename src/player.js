@@ -119,7 +119,7 @@
         this.timer.innerHTML = '00:00';
         this.title.innerHTML = track.artist + ' / ' + track.title;
         this.album.innerHTML = track.album;
-        document.body.style.backgroundColor = track.color;
+        document.body.style.backgroundImage = 'url("' + track.poster + '")';
         this._player.src = track.src;
 
         return this;

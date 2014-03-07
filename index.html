@@ -9,6 +9,7 @@
         <link href="src/gesturekit.help.min.css" rel="stylesheet">
     </head>
     <body>
+        <div id="background"></div>
         <section class="gk-player">
             <h1 class="gk-player-title"></h1>
             <h2 class="gk-player-album"></h2>
@@ -29,26 +30,26 @@ data-bgColor="#FFFFFF" data-displayInput="false">
         <script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
 
         <script>
-
+            var p;
             window.onload = function () {
                 var visor = new Visor(),
                     help = new Help({
                         'uid': '988786d4-56dd-45d6-a558-1245954d815c'
-                    }),
+                    });
                     p = new Player({
                         'volume': 25,
                         'playlist': [{
                             'title': 'Ilumine',
                             'artist': 'Efflugence',
                             'album': 'Ilumine EP',
-                            'color': '#c0392b',
+                            'poster': 'https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track01.jpg',
                             'src': 'https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track01.mp3'
                         },
                         {
                             'title': 'The One',
                             'artist': 'Marsbeing ft Deniz Reno',
                             'album': 'FutureGarage',
-                            'color': '#2980b9',
+                            'poster': 'https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track02.jpg',
                             'src': 'https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track02.mp3'
                         }]
                     });
