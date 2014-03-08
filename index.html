@@ -20,7 +20,7 @@ data-bgColor="#FFFFFF" data-displayInput="false">
             </div>
         </section>
 
-        <script src="src/gesturekit.min.js"></script>
+        <script src="http://localhost:8080/dist/gesturekit.js"></script>
         <script src="src/gesturekit.visor.min.js"></script>
         <script src="src/gesturekit.help.min.js"></script>
 
@@ -30,12 +30,11 @@ data-bgColor="#FFFFFF" data-displayInput="false">
         <script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
 
         <script>
-            var p;
             window.onload = function () {
                 var visor = new Visor(),
                     help = new Help({
                         'uid': '988786d4-56dd-45d6-a558-1245954d815c'
-                    });
+                    }),
                     p = new Player({
                         'volume': 25,
                         'playlist': [{
