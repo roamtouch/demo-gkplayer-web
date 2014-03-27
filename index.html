@@ -2,9 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Visor.js</title>
+        <title>GK Player - A Music Player App by GestureKit</title>
+        <meta name="description" content="Welcome to the revolutionary world of GestureKit (GK) where buttons are not needed! everything can be managed with a simple gesture with the fingers.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
         <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="icon" href="src/favicon.ico">
+
         <link href="src/player.css" rel="stylesheet">
         <link href="src/gesturekit.helper.min.css" rel="stylesheet">
     </head>
@@ -30,7 +34,7 @@ data-bgColor="#FFFFFF" data-displayInput="false">
 
         <script>
             window.onload = function () {
-                new Player({
+                var player = new Player({
                     'volume': 25,
                     'playlist': [{
                         'title': 'Ilumine',
@@ -51,26 +55,26 @@ data-bgColor="#FFFFFF" data-displayInput="false">
                 $(function() {
                     $(".gk-player-volume, .knob").knob({
                         'change': function (value) {
-                            p.volume(value);
+                            player.volume(value);
                         }
                     });
                 });
 
                 gesturekit
                     .on('GK_PLAY', function () {
-                        p.play();
+                        player.play();
                     })
                     .on('GK_PAUSE', function () {
-                        p.pause();
+                        player.pause();
                     })
                     .on('GK_STOP', function () {
-                        p.stop();
+                        player.stop();
                     })
                     .on('GK_FORWARD', function () {
-                        p.next();
+                        player.next();
                     })
                     .on('GK_BACKWARD', function () {
-                        p.prev();
+                        player.prev();
                     });
 
                 gesturekit.init({
