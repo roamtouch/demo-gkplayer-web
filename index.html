@@ -61,19 +61,19 @@ data-bgColor="#FFFFFF" data-displayInput="false">
                 });
 
                 gesturekit
-                    .on('GK_PLAY', function () {
+                    .on('PLAY', function () {
                         player.play();
                     })
-                    .on('GK_PAUSE', function () {
+                    .on('PAUSE', function () {
                         player.pause();
                     })
-                    .on('GK_STOP', function () {
+                    .on('STOP', function () {
                         player.stop();
                     })
-                    .on('GK_FORWARD', function () {
+                    .on('FORWARD', function () {
                         player.next();
                     })
-                    .on('GK_BACKWARD', function () {
+                    .on('BACKWARD', function () {
                         player.prev();
                     });
 
