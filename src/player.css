@@ -32,11 +32,31 @@ body {
     right: -252px;
 }
 
+.gk-player-buttons {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 100px;
+}
+
+.gk-player-button {
+    border: 1px solid transparent;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #4D5259;
+    color: #ecf0f1;
+    padding: 0 16px;
+    margin: 0 15px;
+}
+
 .gk-player-volume-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -100px;
+    margin-top: -130px;
     margin-left: -100px;
 }
 
@@ -48,7 +68,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: 10px;
+    margin-top: -10px;
     margin-left: -30px;
     font-size: 1.5em;
 }
