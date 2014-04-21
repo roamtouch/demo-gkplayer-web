@@ -23,8 +23,9 @@
 data-bgColor="#ECF0F1" data-displayInput="false">
             </div>
             <div class="gk-player-buttons">
+                <button id="fb" class="gk-player-button" data-icon="fb">&#9194;</button>
                 <button id="play" class="gk-player-button" data-icon="play">&#9654;</button>
-                <button id="pause" class="gk-player-button" data-icon="pause">&#8214;</button>
+                <button id="ff" class="gk-player-button" data-icon="ff">&#9193;</button>
             </div>
         </section>
 
@@ -39,7 +40,7 @@ data-bgColor="#ECF0F1" data-displayInput="false">
 
         <script>
             window.onload = function () {
-                var player = new Player({
+                var player = window.player = new Player({
                     'volume': 25,
                     'playlist': [{
                         'title': 'Great Balls Of Fire',
@@ -57,6 +58,8 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                     }]
                 });
 
+                new Image().src='https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track01.jpg';
+
                 $(function() {
                     $(".gk-player-volume, .knob").knob({
                         'change': function (value) {
@@ -64,12 +67,31 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                         }
                     });
                 });
+                var play = document.querySelector('#play');
+                play.addEventListener('click', function () {
+                    player.toggle();
+                    if (!player._player.paused) {
+                        this.innerHTML = '&#8214;';
+                    } else {
+                        this.innerHTML = '&#9654;';
+                    }
 
-                document.querySelector('#play').addEventListener('click', function () {
-                    player.play();
                 }, false);
-                document.querySelector('#pause').addEventListener('click', function () {
-                    player.pause();
+                document.querySelector('#ff').addEventListener('click', function () {
+                    player.next();
+                    if (!player._player.paused) {
+                        play.innerHTML = '&#8214;';
+                    } else {
+                        play.innerHTML = '&#9654;';
+                    }
+                }, false);
+                document.querySelector('#fb').addEventListener('click', function () {
+                    player.prev();
+                    if (!player._player.paused) {
+                        play.innerHTML = '&#8214;';
+                    } else {
+                        play.innerHTML = '&#9654;';
+                    }
                 }, false);
 
 
@@ -101,7 +123,10 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                     });
 
                     gesturekit.helper();
-                    return;
+
+                    if (n === count) {
+                        alert('GestureKit is enabled!');
+                    }
                   }
 
                   count += 1;

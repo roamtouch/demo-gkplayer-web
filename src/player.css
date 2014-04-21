@@ -60,7 +60,7 @@ body {
     position: absolute;
     text-align: center;
     width: 100%;
-    bottom: 100px;
+    bottom: 75px;
 }
 
 .gk-player-button {
@@ -72,12 +72,21 @@ body {
     line-height: .5em;
     background-color: #4D5259;
     color: #ecf0f1;
-    padding: 2px 14px 0;
-    margin: 0 15px;
 }
 
 #play.gk-player-button {
-    padding-left: 16px;
+    width: 78px;
+    height: 78px;
+    font-size: 6em;
+    padding-left: 8px;
+}
+
+#ff.gk-player-button {
+    text-indent: 4px;
+}
+
+#fb.gk-player-button {
+    text-indent: -4px;
 }
 
 .gk-player-volume-container {
