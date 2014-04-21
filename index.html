@@ -98,7 +98,7 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                 (function (window, n) {
                   'use strict';
                   var storage = window.localStorage;
-                  var count = parseInt(storage.getItem('gkcounter'), 10) || 0;
+                  var count = parseInt(storage.getItem('gkcounter'), 10) || 1;
 
                   if (count >= n) {
                     gesturekit
