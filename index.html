@@ -13,7 +13,6 @@
         <link href="src/gesturekit.helper.min.css" rel="stylesheet">
     </head>
     <body>
-        <div id="background"></div>
         <section class="gk-player">
             <h1 class="gk-player-title"></h1>
             <h2 class="gk-player-album"></h2>
@@ -28,7 +27,12 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                 <button id="ff" class="gk-player-button" data-icon="ff">&#9193;</button>
             </div>
         </section>
-
+        <div class="modal">
+            <div>
+                <h2>GestureKit is enabled</h2>
+                <h3>Have fun doing gestures!</h3>
+            </div>
+        </div>
 
         <script src="src/gesturekit.min.js"></script>
         <script src="src/gesturekit.helper.min.js"></script>
@@ -40,6 +44,7 @@ data-bgColor="#ECF0F1" data-displayInput="false">
 
         <script>
             window.onload = function () {
+                'use strict';
                 var player = window.player = new Player({
                     'volume': 25,
                     'playlist': [{
@@ -67,36 +72,33 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                         }
                     });
                 });
-                var play = document.querySelector('#play');
-                play.addEventListener('click', function () {
-                    player.toggle();
-                    if (!player._player.paused) {
-                        this.innerHTML = '&#8214;';
-                    } else {
-                        this.innerHTML = '&#9654;';
-                    }
 
-                }, false);
-                document.querySelector('#ff').addEventListener('click', function () {
+                function togglePlay() {
+                    var $play = $('#play');
+                    if (!player._player.paused) {
+                        $play.html('&#8214;');
+                    } else {
+                        $play.html('&#9654;');
+                    }
+                }
+
+                $('#play').on('click', function () {
+                    player.toggle();
+                    togglePlay();
+                });
+
+                $('#ff').on('click', function () {
                     player.next();
-                    if (!player._player.paused) {
-                        play.innerHTML = '&#8214;';
-                    } else {
-                        play.innerHTML = '&#9654;';
-                    }
-                }, false);
-                document.querySelector('#fb').addEventListener('click', function () {
+                    togglePlay();
+                });
+
+                $('#fb').on('click', function () {
                     player.prev();
-                    if (!player._player.paused) {
-                        play.innerHTML = '&#8214;';
-                    } else {
-                        play.innerHTML = '&#9654;';
-                    }
-                }, false);
+                    togglePlay();
+                });
 
 
                 (function (window, n) {
-                  'use strict';
                   var storage = window.localStorage;
                   var count = parseInt(storage.getItem('gkcounter'), 10) || 1;
 
@@ -104,9 +106,11 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                     gesturekit
                         .on('PLAY', function () {
                             player.play();
+                            togglePlay();
                         })
                         .on('PAUSE', function () {
                             player.pause();
+                            togglePlay();
                         })
                         .on('STOP', function () {
                             player.stop();
@@ -122,10 +126,17 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                         'gid': '988786d4-56dd-45d6-a558-1245954d815c'
                     });
 
-                    gesturekit.helper();
+                    var helper = gesturekit.helper();
 
                     if (n === count) {
-                        alert('GestureKit is enabled!');
+                        var $modal = $('.modal');
+
+                        $modal.fadeIn();
+
+                        gesturekit.once('pointerend', function() {
+                            $modal.fadeOut();
+                            storage.removeItem('gkcounter');
+                        });
                     }
                   }
 

@@ -109,3 +109,23 @@ body {
     margin-left: -30px;
     font-size: 1.5em;
 }
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #FFF;
+    font-family: Helvetica, Arial, sans-serif;
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    text-align: center;
+    display: none;
+}
+
+.modal div {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    margin-top: -1em;
+}
