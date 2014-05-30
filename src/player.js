@@ -11,6 +11,7 @@
 
         defaults = {
             'volume': 50,
+            'progress': 0,
             'indexTrack': 0
         },
 
@@ -70,13 +71,23 @@
 
         this.title = document.querySelector('.gk-player-title');
 
+        this.progressBar = document.querySelector('.gk-player-progress');
+
         this.album = document.querySelector('.gk-player-album');
+
+        this.progressHead = document.querySelector('.gk-volume-lead');
+
+        this.volumeContainer = document.querySelector('.gk-player-volume-container');
+
+        this.background = document.querySelector('.gk-background-cover');
 
         this._player = new Audio();
 
         this._muted = false;
 
         this.volume(this._options.volume);
+
+        this.progress(this._options.progress);
 
         this.playlist = this._options.playlist;
 
@@ -100,7 +111,7 @@
         if (track) {
             this.setTrack(track);
         }
-
+        this.background.style.backgroundColor = 'transparent';
         this._player.play();
 
         return this;
@@ -134,7 +145,7 @@
      */
     Player.prototype.pause = function () {
         this._player.pause();
-
+        this.background.style.backgroundColor = '#2FC0E0';
         return this;
     };
 
@@ -149,6 +160,7 @@
         if (this._player.currentTime) {
             this._player.currentTime = 0;
             this._player.pause();
+            this.background.style.backgroundColor = '#2FC0E0';
         }
         return this;
     };
@@ -211,7 +223,35 @@
     Player.prototype.volume = function (value) {
 
         this._player.volume = value / 100;
+        var angle = this._player.volume * 360;
+        var progressHeadPosition = this.volumeContainer.getBoundingClientRect();
+        // console.log(progressHeadPosition.left);
+        // console.log(progressHeadPosition.top);
+        var left = progressHeadPosition.left + 100;
+        var top = progressHeadPosition.top + 130;
+        this.progressHead.style.left =  Math.sin(angle*Math.PI/180) * 95 + left + 'px';
+        this.progressHead.style.top = - Math.cos(angle*Math.PI/180) * 95 + top +'px';
+        return this;
+    };
 
+     /**
+     * Initializes a new instance of Player.
+     * @memberof! Player.prototype
+     * @function
+     * @private
+     * @returns {player}
+     */
+    Player.prototype.progress = function (value) {
+        var percentage = value / 100;
+        this._player.progress = value;
+        if (value !== 0)
+        {
+            // console.log(this._player.currentTime);
+            // console.log(this._player.duration);
+            // console.log(percentage);
+            // console.log(this._player.duration / percentage);
+            this._player.currentTime = this._player.duration * percentage;
+        }
         return this;
     };
 
@@ -277,7 +317,7 @@
 
             s = s < 10 ? '0' + s : s;
             m = m < 10 ? '0' + m : m;
-
+            that.progressBar.value = player.currentTime / player.duration * 100;
             that.timer.innerHTML = m + ':' + s;
         });
 

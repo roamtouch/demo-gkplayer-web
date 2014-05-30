@@ -14,34 +14,44 @@
         <link href="http://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
     </head>
     <body>
-        <section class="gk-player">
-            <h1 class="gk-player-title"></h1>
-            <h2 class="gk-player-album"></h2>
-            <div class="gk-player-time"></div>
-            <div class="gk-player-volume-container">
-                <input class="gk-player-volume" type="range" value="25" value="0" data-skin="tron" data-width="200" data-fgColor="#7f8c8d"
-data-bgColor="#ECF0F1" data-displayInput="false">
-            </div>
-            <div class="gk-player-buttons">
-                <button id="fb" class="gk-player-button" data-icon="fb">&#9194;</button>
-                <button id="play" class="gk-player-button" data-icon="play">&#9654;</button>
-                <button id="ff" class="gk-player-button" data-icon="ff">&#9193;</button>
-            </div>
-        </section>
-        <div class="modal">
-            <i class="arrow"></i>
-            <div>
-                <h2>Did you know that you can also draw gestures?</h2>
+        <div class="gk-background-cover">
+            <section class="gk-player">
+                <div class="gk-player-volume-container-addition">
+                </div>
+                <h1 class="gk-player-title"></h1>
+                <h2 class="gk-player-album"></h2>
+                <div class="gk-player-time"></div>
+                <div class="gk-player-volume-container">
+                    <input class="gk-player-volume" type="range" value="25" value="0" data-skin="tron" 
+                    data-width="200" data-fgColor="#7f8c8d" data-thickness=.1
+                    data-bgColor="#ECF0F1" data-displayInput="false">
+                </div>
+                <div class="gk-player-progress-container">
+                    <input class="gk-player-progress" data-bgColor="#CBCFC6" value="0" data-displayInput=false data-width="120" data-height="120" data-fgColor="#60635A" data-thickness=".3">
+                </div>
+                <button class="gk-volume-lead" disabled="disabled"></button>
+                <div class="gk-player-buttons">
+                    <button id="fb" class="gk-player-button"></button>
+                    <button id="stop" class="gk-player-button"></button>
+                    <button id="play" class="gk-player-button"></button>
+                    <button id="pause" class="gk-player-button"></button>
+                    <button id="ff" class="gk-player-button"></button>
+                </div>
+            </section>
+            <div class="modal">
+                <i class="arrow"></i>
+                <div>
+                    <h2>Did you know that you can also draw gestures?</h2>
+                </div>
             </div>
         </div>
-
         <script src="src/gesturekit.min.js"></script>
         <script src="src/gesturekit.helper.min.js"></script>
 
         <script src="src/player.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" ></script>
-        <script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
+        <script src="src/jquery.knob.js"></script>
 
         <script>
             window.onload = function () {
@@ -72,20 +82,45 @@ data-bgColor="#ECF0F1" data-displayInput="false">
                             player.volume(value);
                         }
                     });
+                    $(".gk-player-progress, .knob").knob({
+                        'change': function (value) {
+                            player.progress(value);
+                        }
+                    });
                 });
+
+                
+                function displayProgress() {
+                    var $progress = $(".gk-player-progress");
+                    // $progress.val().trigger("change");
+                    // $m.val(m).trigger("change");
+                    // $h.val(h).trigger("change");
+                    var progress = $progress.attr('value');
+                    $progress.val(progress).trigger("change");
+                }
 
                 function togglePlay() {
                     var $play = $('#play');
                     if (!player._player.paused) {
-                        $play.html('&#8214;');
+                        var progress = setInterval(function(){displayProgress()}, 500);
                     } else {
-                        $play.html('&#9654;');
+                        clearInterval(progress);
                     }
                 }
 
                 $('#play').on('click', function () {
                     player.toggle();
                     togglePlay();
+                });
+
+                $('#pause').on('click', function () {
+                    player.pause();
+                    // togglePlay();
+                });
+
+                $('#stop').on('click', function () {
+                    player.stop();
+                    // togglePlay();
                 });
 
                 $('#ff').on('click', function () {

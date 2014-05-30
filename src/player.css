@@ -33,6 +33,28 @@ body {
     font-family: 'Helvetica', Arial, sans-serif;
 }
 
+.gk-volume-lead {
+    border-radius: 50%;
+    width: 20px;
+    border: none;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    margin-top: -40px;
+    margin-left: -10px;
+    background: #ECF0F1; 
+    /* width and height can be anything, as long as they're equal */
+}
+
+.gk-background-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2FC0E0;
+}
+
 .gk-player {
     width: 100%;
     color: #fff;
@@ -64,29 +86,113 @@ body {
 }
 
 .gk-player-button {
-    border: 1px solid transparent;
-    border-radius: 100%;
-    width: 48px;
-    height: 48px;
-    font-size: 3em;
-    line-height: .5em;
-    background-color: #4D5259;
-    color: #ecf0f1;
-}
-
-#play.gk-player-button {
-    width: 78px;
-    height: 78px;
-    font-size: 6em;
-    padding-left: 8px;
-}
-
-#ff.gk-player-button {
-    text-indent: 4px;
+    width: 50px;
+    height: 22px;
+    border: none;
 }
 
 #fb.gk-player-button {
-    text-indent: -4px;
+    background: url('button_images/gk-rewind.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#stop.gk-player-button {
+    background: url('button_images/gk-stop.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#play.gk-player-button {
+    background: url('button_images/gk-play.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#pause.gk-player-button {
+    background: url('button_images/gk-pause.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#ff.gk-player-button {
+    background: url('button_images/gk-fastforward.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+/*
+    Change images for retina display
+*/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) 
+{ 
+  
+    #fb.gk-player-button {
+        background: url('button_images/gk-rewind@2x.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+    }
+
+    #stop.gk-player-button {
+        background: url('button_images/gk-stop@2x.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+    }
+
+    #play.gk-player-button {
+        background: url('button_images/gk-play@2x.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+    }
+
+    #pause.gk-player-button {
+        background: url('button_images/gk-pause@2x.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+    }
+
+    #ff.gk-player-button {
+        background: url('button_images/gk-fastforward@2x.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%; 
+    }
+
+}
+
+.gk-player-volume-container-addition{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    margin-top: -130px;
+    margin-left: -100px;
+    width: 200px;
+    height: 200px;
+    background: rgb(172, 181, 172);
+}
+
+.gk-player-progress-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -90px;
+    margin-left: -60px;
+}
+
+.gk-player-progress {
+    visibility: hidden;
 }
 
 .gk-player-volume-container {
@@ -105,7 +211,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -10px;
+    margin-top: -40px;
     margin-left: -30px;
     font-size: 1.5em;
 }
@@ -145,3 +251,4 @@ body {
     font-size: 2.3em;
     padding: 0 20px;
 }
+
