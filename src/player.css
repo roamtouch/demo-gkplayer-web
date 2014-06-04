@@ -22,6 +22,105 @@
     vertical-align: middle;
 }
 
+/* gk player animations for help toggle*/
+
+@keyframes gkPlayer-animation-enter
+{
+     from {
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1);
+        opacity: 1; /* Standard syntax */ 
+    }
+    to {
+        -ms-transform:scale(0.8);
+        opacity: 0.5; /* IE 9 */
+        -webkit-transform:scale(0.8); /* Chrome, Safari, Opera */
+        transform:scale(0.8); /* Standard syntax */ 
+    }
+}
+
+@-webkit-keyframes gkPlayer-animation-enter /*Safari and Chrome*/
+{
+    from {
+        -ms-transform:scale(1);
+        opacity: 1; /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+    }
+    to {
+        -ms-transform:scale(0.8);
+        opacity: 0.5; /* IE 9 */
+        -webkit-transform:scale(0.8); /* Chrome, Safari, Opera */
+        transform:scale(0.8); /* Standard syntax */ 
+    }
+}
+
+@keyframes gkPlayer-animation-leave
+{
+     from {
+        -ms-transform:scale(0.8);
+        opacity: 0.5; /* IE 9 */
+        -webkit-transform:scale(0.8); /* Chrome, Safari, Opera */
+        transform:scale(0.8); /* Standard syntax */ 
+    }
+    to {
+        opacity: 1;
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+    }
+}
+
+@-webkit-keyframes gkPlayer-animation-leave /*Safari and Chrome*/
+{
+    from {
+        -ms-transform:scale(0.8);
+        opacity: 0.5; /* IE 9 */
+        -webkit-transform:scale(0.8); /* Chrome, Safari, Opera */
+        transform:scale(0.8); /* Standard syntax */ 
+    }
+    to {
+        opacity: 1;
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+    }
+}
+
+.gk-player-animate-enter {
+    animation:gkPlayer-animation-enter 1s;
+    -webkit-animation:gkPlayer-animation-enter 1s; /*Safari and Chrome*/
+    -ms-transform:scale(0.8); /* IE 9 */
+    -webkit-transform:scale(0.8); /* Chrome, Safari, Opera */
+    transform:scale(0.8); /* Standard syntax */
+    opacity: 0.5;
+    /*top: 50%;
+    left: 50%;*/
+}
+
+.toggle-help {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    background: none;
+    cursor: pointer; 
+    cursor: hand;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+.gk-player-animate-leave {
+    animation:gkPlayer-animation-leave 0.5s;
+    -webkit-animation:gkPlayer-animation-leave 0.5s; /*Safari and Chrome*/
+    /*top: 50%;
+    left: 50%;*/
+}
 body {
     position: absolute;
     top: 0;
@@ -31,6 +130,18 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     font-family: 'Helvetica', Arial, sans-serif;
+
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+       /*
+         Introduced in IE 10.
+         See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+       */
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .gk-volume-lead {
@@ -48,11 +159,127 @@ body {
     /* width and height can be anything, as long as they're equal */
 }
 
+/* gk-helper animation */
+
+@keyframes gk-helper-animate-enter
+{
+     from {
+        -ms-transform:scale(1.5); /* IE 9 */
+        -webkit-transform:scale(1.5); /* Chrome, Safari, Opera */
+        transform:scale(1.5); /* Standard syntax */ 
+        opacity: 0;
+    }
+    to {
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes gk-helper-animate-enter /*Safari and Chrome*/
+{
+    from {
+        -ms-transform:scale(1.5); /* IE 9 */
+        -webkit-transform:scale(1.5); /* Chrome, Safari, Opera */
+        transform:scale(1.5); /* Standard syntax */ 
+        opacity: 0;
+    }
+    to {
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+        opacity: 1;
+    }
+}
+
+@keyframes gk-helper-animate-leave
+{
+     from {
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+        opacity: 1;
+    }
+    to {
+        -ms-transform:scale(1.5); /* IE 9 */
+        -webkit-transform:scale(1.5); /* Chrome, Safari, Opera */
+        transform:scale(1.5); /* Standard syntax */ 
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes gk-helper-animate-leave /*Safari and Chrome*/
+{
+    from {
+        -ms-transform:scale(1); /* IE 9 */
+        -webkit-transform:scale(1); /* Chrome, Safari, Opera */
+        transform:scale(1); /* Standard syntax */ 
+        opacity: 1;
+    }
+    to {
+        -ms-transform:scale(1.5); /* IE 9 */
+        -webkit-transform:scale(1.5); /* Chrome, Safari, Opera */
+        transform:scale(1.5); /* Standard syntax */ 
+        opacity: 0;
+    }
+}
+
+.gk-helper-leave {
+    animation:gk-helper-animate-leave 1s;
+    -webkit-animation:gk-helper-animate-leave 1s;
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.gk-helper {
+    display: none;
+}
+
+.gk-helper-enter {
+    display: block;
+    animation:gk-helper-animate-enter 0.5s;
+    -webkit-animation:gk-helper-animate-enter 0.5s; /*Safari and Chrome*/   
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.gk-helper-background, .gk-helper-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.gk-helper-background {
+    opacity: 0.8;
+    background: black;
+}
+
+.gk-helper-text {
+    top: 100px;
+    color: white;
+    text-align: center;
+}
+
 .gk-background-cover {
     position: absolute;
     width: 100%;
     height: 100%;
     background: #2FC0E0;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    z-index: -1;
+    /*opacity: 0.4;
+    filter: blur(5px);*/
 }
 
 .gk-player {
@@ -68,6 +295,8 @@ body {
 .gk-player-album {
     font-weight: 100;
     font-size: 3.2em;
+    transform:rotate(270deg);
+    -ms-transform:rotate(270deg); /* IE 9 */
     -webkit-transform: rotate(270deg);
     margin: 0;
     width: 568px;
@@ -189,6 +418,7 @@ only screen and (                min-resolution: 2dppx)
     left: 50%;
     margin-top: -90px;
     margin-left: -60px;
+    opacity: 0.5;
 }
 
 .gk-player-progress {
@@ -199,8 +429,12 @@ only screen and (                min-resolution: 2dppx)
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     margin-top: -130px;
     margin-left: -100px;
+    background-size: cover;
 }
 
 .gk-player-volume {

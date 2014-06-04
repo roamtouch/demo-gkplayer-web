@@ -14,22 +14,25 @@
         <link href="http://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
     </head>
     <body>
-        <div class="gk-background-cover">
+        <div class="gk-background-cover"></div>
+        <button class="toggle-help">i</button>
+
+        <div class="gk-zoom-out">
             <section class="gk-player">
                 <div class="gk-player-volume-container-addition">
                 </div>
                 <h1 class="gk-player-title"></h1>
                 <h2 class="gk-player-album"></h2>
-                <div class="gk-player-time"></div>
                 <div class="gk-player-volume-container">
                     <input class="gk-player-volume" type="range" value="25" value="0" data-skin="tron" 
-                    data-width="200" data-fgColor="#7f8c8d" data-thickness=.1
+                    data-width="200" data-fgColor="#7f8c8d" data-thickness=".1"
                     data-bgColor="#ECF0F1" data-displayInput="false">
                 </div>
                 <div class="gk-player-progress-container">
                     <input class="gk-player-progress" data-bgColor="#CBCFC6" value="0" data-displayInput=false data-width="120" data-height="120" data-fgColor="#60635A" data-thickness=".3">
                 </div>
                 <button class="gk-volume-lead" disabled="disabled"></button>
+                <div class="gk-player-time"></div>
                 <div class="gk-player-buttons">
                     <button id="fb" class="gk-player-button"></button>
                     <button id="stop" class="gk-player-button"></button>
@@ -38,11 +41,21 @@
                     <button id="ff" class="gk-player-button"></button>
                 </div>
             </section>
-            <div class="modal">
-                <i class="arrow"></i>
-                <div>
-                    <h2>Did you know that you can also draw gestures?</h2>
-                </div>
+        </div>
+        <div class="gk-helper">
+            <div class="gk-helper-background">
+            </div>
+            <div class="gk-helper-text">
+                <h1>This app doesn't use buttons. It uses special gestures!</h1>
+                <h1>To learn how to use gestures just draw a "?" with your finger.</h1>
+                <h1>You too can use Gesture Kit in your app <a href="http://www.gesturekit.com/">www.gesturekit.com</a></h1>
+                <h1>Powered by <br /> <a href="http://www.roamtouch.com/">www.roamtouch.com</a></h1>
+            </div>
+        </div>
+        <div class="modal">
+            <i class="arrow"></i>
+            <div>
+                <h2>Did you know that you can also draw gestures?</h2>
             </div>
         </div>
         <script src="src/gesturekit.min.js"></script>
@@ -89,7 +102,27 @@
                     });
                 });
 
-                
+                function showHelp() {
+                    var gkPlayer = document.querySelector('.gk-zoom-out');
+                    gkPlayer.className = "gk-zoom-out";
+                    gkPlayer.className += ' gk-player-animate-enter';
+                    var helper = document.querySelector('.gk-helper');
+                    helper.className = "gk-helper" 
+                    helper.className += ' gk-helper-enter';
+                    var gkHelper = document.querySelector('.gk-helper-enter');
+                    if(gkHelper)
+                    {
+                        gkHelper.onclick = function() {
+                            gkHelper.className = "gk-helper-leave";
+                            var progress = setTimeout(function(){gkHelper.className = "gk-helper";}, 1000);
+                            var gkPlayer = document.querySelector('.gk-zoom-out');
+                            gkPlayer.className = 'gk-zoom-out gk-player-animate-leave'; 
+                        }
+                    }
+                };
+
+                var butt = document.querySelector('.toggle-help');
+                butt.onclick = showHelp;
                 function displayProgress() {
                     var $progress = $(".gk-player-progress");
                     // $progress.val().trigger("change");
@@ -102,7 +135,7 @@
                 function togglePlay() {
                     var $play = $('#play');
                     if (!player._player.paused) {
-                        var progress = setInterval(function(){displayProgress()}, 500);
+                        var progress = setInterval(function(){displayProgress()}, 10);
                     } else {
                         clearInterval(progress);
                     }
@@ -157,7 +190,7 @@
                         .on('BACKWARD', function () {
                             player.prev();
                         });
-
+                        showHelp();
                     gesturekit.init({
                         'gid': '988786d4-56dd-45d6-a558-1245954d815c'
                     });

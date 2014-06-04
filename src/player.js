@@ -111,7 +111,9 @@
         if (track) {
             this.setTrack(track);
         }
-        this.background.style.backgroundColor = 'transparent';
+        // this.background.style.backgroundColor = 'transparent';
+        this.volumeContainer.style.backgroundImage = 'url("' + this.currentTrack.poster + '")';
+        this.background.style.backgroundImage = 'url("' + this.currentTrack.poster + '")';
         this._player.play();
 
         return this;
@@ -130,7 +132,7 @@
         this.timer.innerHTML = '00:00';
         this.title.innerHTML = track.artist + ' / ' + track.title;
         this.album.innerHTML = track.album;
-        document.body.style.backgroundImage = 'url("' + track.poster + '")';
+        // this.background.style.background = 'none';
         this._player.src = track.src;
 
         return this;
@@ -145,6 +147,8 @@
      */
     Player.prototype.pause = function () {
         this._player.pause();
+        this.volumeContainer.style.backgroundImage = 'none';
+        this.background.style.backgroundImage = 'none';
         this.background.style.backgroundColor = '#2FC0E0';
         return this;
     };
@@ -160,6 +164,8 @@
         if (this._player.currentTime) {
             this._player.currentTime = 0;
             this._player.pause();
+            this.volumeContainer.style.backgroundImage = 'none';
+            this.background.style.backgroundImage = 'none';
             this.background.style.backgroundColor = '#2FC0E0';
         }
         return this;
@@ -180,6 +186,7 @@
         }
 
         this._indexTrack = index;
+
         this.setTrack(this.playlist[this._indexTrack]);
 
 
