@@ -68,6 +68,8 @@ body {
 .gk-player-album {
     font-weight: 100;
     font-size: 3.2em;
+    transform:rotate(270deg);
+    -ms-transform:rotate(270deg); /* IE 9 */
     -webkit-transform: rotate(270deg);
     margin: 0;
     width: 568px;

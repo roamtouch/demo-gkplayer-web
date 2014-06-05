@@ -10,7 +10,7 @@
         <link rel="icon" href="src/favicon.ico">
 
         <link href="src/player.css" rel="stylesheet">
-        <link href="src/gesturekit.helper.min.css" rel="stylesheet">
+        <link href="src/gesturekit.helper.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
     </head>
     <body>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <script src="src/gesturekit.min.js"></script>
-        <script src="src/gesturekit.helper.min.js"></script>
+        <script src="src/gesturekit.helper.js"></script>
 
         <script src="src/player.js"></script>
 
@@ -76,6 +76,59 @@
 
                 new Image().src='https://github.com/RoamTouch/demo-gkplayer-web/raw/gh-pages/tracks/track01.jpg';
 
+                (function (window, n) {
+                  var storage = window.localStorage;
+                  var count = parseInt(storage.getItem('gkcounter'), 10) || 1;
+
+                  if (count >= n) {
+                    gesturekit
+                        .on('PLAY', function () {
+                            player.play();
+                            togglePlay();
+                        })
+                        .on('PAUSE', function () {
+                            player.pause();
+                            togglePlay();
+                        })
+                        .on('STOP', function () {
+                            player.stop();
+                        })
+                        .on('FORWARD', function () {
+                            player.next();
+                        })
+                        .on('BACKWARD', function () {
+                            player.prev();
+                        });
+
+                        var $modal = $('.modal');
+
+                        $modal.fadeIn();
+
+                        gesturekit.once('pointerend', function() {
+                            $modal.fadeOut();
+                            storage.removeItem('gkcounter');
+                        });
+                    gesturekit.init({
+                        'gid': '988786d4-56dd-45d6-a558-1245954d815c'
+                    });
+
+                    var helper = gesturekit.helper();
+                    var body = document.body; 
+                    body.onclick = function(event) {
+                        var helpContainer = document.querySelector('.gk-helper-container');
+                        var helpStyle = window.getComputedStyle(helpContainer, null);
+                        if (helpStyle.display !== 'none' && event.toElement.className.toString() !=='gk-helper-display')
+                        {
+                            helper.hideGestures();
+                        }
+                    };
+                  }
+
+                  count += 1;
+                  storage.setItem('gkcounter', count);
+
+                }(this, 2));
+
                 $(function() {
                     $(".gk-player-volume, .knob").knob({
                         'change': function (value) {
@@ -102,7 +155,7 @@
                 function togglePlay() {
                     var $play = $('#play');
                     if (!player._player.paused) {
-                        var progress = setInterval(function(){displayProgress()}, 500);
+                        var progress = setInterval(function(){displayProgress()}, 10);
                     } else {
                         clearInterval(progress);
                     }
@@ -132,54 +185,6 @@
                     player.prev();
                     togglePlay();
                 });
-
-
-                (function (window, n) {
-                  var storage = window.localStorage;
-                  var count = parseInt(storage.getItem('gkcounter'), 10) || 1;
-
-                  if (count >= n) {
-                    gesturekit
-                        .on('PLAY', function () {
-                            player.play();
-                            togglePlay();
-                        })
-                        .on('PAUSE', function () {
-                            player.pause();
-                            togglePlay();
-                        })
-                        .on('STOP', function () {
-                            player.stop();
-                        })
-                        .on('FORWARD', function () {
-                            player.next();
-                        })
-                        .on('BACKWARD', function () {
-                            player.prev();
-                        });
-
-                    gesturekit.init({
-                        'gid': '988786d4-56dd-45d6-a558-1245954d815c'
-                    });
-
-                    var helper = gesturekit.helper();
-
-                    if (n === count) {
-                        var $modal = $('.modal');
-
-                        $modal.fadeIn();
-
-                        gesturekit.once('pointerend', function() {
-                            $modal.fadeOut();
-                            storage.removeItem('gkcounter');
-                        });
-                    }
-                  }
-
-                  count += 1;
-                  storage.setItem('gkcounter', count);
-
-                }(this, 2));
 
 
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-50160058-1', 'gesturekit.com');ga('send', 'pageview');
