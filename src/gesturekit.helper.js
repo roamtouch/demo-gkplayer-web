@@ -491,24 +491,77 @@
         }
 
     // remove old keyframes and add new ones
-    function change(anim, from, to)
+    function change(anim, from, to, that)
         {
             // find our -webkit-keyframe rule
             var keyframes = findKeyframesRule(anim);
-            
+            var startWidth = 0;
+            var endWidth = 360;
             // remove the existing 0% and 100% rules
             keyframes.deleteRule("from");
             keyframes.deleteRule("to");
+            console.log();
             
+
+
+            if(that.container.offsetWidth < 363)
+            {
+                if(from !== 0)
+                {
+                    to = from - 240;
+                    that.showroom.container.style.right = 2 + 'px';
+                    that.showroom.container.style.left = 'initial';
+                    for (var i=0; i<that.showroom.container.children.length; i++)
+                    {
+                        that.showroom.container.children[i].style.float = 'right';
+                    }
+                }
+                else
+                {
+                    for (var i=0; i<that.showroom.container.children.length; i++)
+                    {
+                        that.showroom.container.children[i].style.float = 'left';
+                    }
+                }
+                endWidth = 240;
+                console.log(that.showroom.container.children);
+                that.showroom.container.style.height = 120 + 'px';
+                that.showroom.container.style.width = 240 + 'px';
+            }
+            else if(that.container.offsetWidth < 423)
+            {
+                if(from !== 0)
+                {
+                    to = from - 300;
+                    that.showroom.container.style.right = 2 + 'px';
+                    that.showroom.container.style.left = 'initial';
+                    for (var i=0; i<that.showroom.container.children.length; i++)
+                    {
+                        that.showroom.container.children[i].style.float = 'right';
+                    }
+                }
+                else
+                {
+                    for (var i=0; i<that.showroom.container.children.length; i++)
+                    {
+                        that.showroom.container.children[i].style.float = 'left';
+                    }
+                }
+                endWidth = 300;
+                console.log(that.showroom.container.children);
+                that.showroom.container.style.height = 120 + 'px';
+                that.showroom.container.style.width = 300 + 'px';
+            }
+
             // create new 0% and 100% rules with random numbers
             if (from !== 0 && to !== 0)
             {
-                keyframes.insertRule("from { width: 0px; left: " + from + "px; }");
-                keyframes.insertRule("to { width: 360px; left: " + to + "px; }");
+                keyframes.insertRule("from { width: " + startWidth + "px; left: " + from + "px; }");
+                keyframes.insertRule("to { width: " + endWidth + "px; left: " + to + "px; }");
             }
             else {
-                keyframes.insertRule("from { width: 0px;}");
-                keyframes.insertRule("to { width: 360px;}");
+                keyframes.insertRule("from { width: " + startWidth + "px;}");
+                keyframes.insertRule("to { width: " + endWidth + "px;}");
             }
             
             // assign the animation to our element (which will cause the animation to run)
@@ -543,16 +596,16 @@
             this.showroom.container.style.top = helperContainerCoordinates.top + 'px';
             this.showroom.container.style.left = newLeft + 'px';
             this.showroom.container.style.paddingLeft = 0 + 'px';
-            this.showroom.container.style.paddingRight = 58 + 'px';
-            change('gkHelper-animation-enter', helperContainerCoordinates.left, helperContainerCoordinates.left - 360);
+            this.showroom.container.style.paddingRight = 60 + 'px';
+            change('gkHelper-animation-enter', helperContainerCoordinates.left, helperContainerCoordinates.left - 360, this);
         }
         else
         {
-            this.showroom.container.style.paddingLeft = 58 + 'px';
+            this.showroom.container.style.paddingLeft = 60 + 'px';
             this.showroom.container.style.paddingRight = 0 + 'px';
             this.showroom.container.style.top = helperContainerCoordinates.top + 'px';
-            this.showroom.container.style.left = helperContainerCoordinates.left + 2 + 'px';
-            change('gkHelper-animation-enter', 0, 0);
+            this.showroom.container.style.left = helperContainerCoordinates.left + 'px';
+            change('gkHelper-animation-enter', 0, 0, this);
         }
         
         this.showroom.container.style.display = 'block';
