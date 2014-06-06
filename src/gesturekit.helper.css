@@ -27,6 +27,34 @@
     }
 }
 
+@keyframes gkGesture-animation-enter
+{
+     from {
+        -ms-transform: scale(0.5); /* IE 9 */
+        -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+        transform: scale(0.5);
+    }
+    to {
+        -ms-transform: scale(1); /* IE 9 */
+        -webkit-transform: scale(1); /* Chrome, Safari, Opera */
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes gkGesture-animation-enter /*Safari and Chrome*/
+{
+    from {
+        -ms-transform: scale(0.5); /* IE 9 */
+        -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+        transform: scale(0.5);
+    }
+    to {
+        -ms-transform: scale(1); /* IE 9 */
+        -webkit-transform: scale(1); /* Chrome, Safari, Opera */
+        transform: scale(1);
+    }
+}
+
 .gk-helper-hide {
     display: none;
 }
@@ -45,6 +73,13 @@
     padding-left: 58px; 
 }
 
+.gk-helper-gesture-container {
+    display: inline-block;
+    -webkit-perspective: 500px; /* Chrome, Safari, Opera */
+    perspective: 500px;
+    position: relative;
+}
+
 .gk-helper-title {
     font-weight: normal;
     padding: 15px 0;
@@ -57,6 +92,22 @@
     text-align: center;
     height: 60px;
     vertical-align: top;
+}
+
+.gk-helper-gesture img {
+    animation:gkGesture-animation-enter 0.2s ease-in-out;
+    -webkit-animation:gkGesture-animation-enter 0.2s ease-in-out;
+}
+
+.gk-helper-gestureDescription {
+    animation:gkGesture-animation-enter 0.2s ease-in-out;
+    -webkit-animation:gkGesture-animation-enter 0.2s ease-in-out;
+    display: none;
+    width: 60px;
+    height: 60px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 10px;
 }
 
 .gk-helper-label {

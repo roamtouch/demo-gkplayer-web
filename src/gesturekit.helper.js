@@ -56,9 +56,13 @@
         }());
 
     function render(gesture) {
+        // console.log(gesture);
         return [
-            '<div class="gk-helper-gesture">',
-            '<img src="data:image/png;base64,' + gesture.img + '" height="60" width="60">',
+            '<div class="gk-helper-gesture-container">',
+                '<div class="gk-helper-gesture">',
+                    '<img src="data:image/png;base64,' + gesture.img + '" height="60" width="60">',
+                    '<p class="gk-helper-gestureDescription">' + gesture.img_description + '</p>',
+                '</div>',
             '</div>'
         ].join('');
     }
@@ -520,6 +524,13 @@
      * helper.showGestures();
      */
     Helper.prototype.showGestures = function () {
+        
+        var children = this.showroom.container.children
+        for (var i=0 ; i< children.length; i++)
+        {
+            children[i].firstChild.firstChild.style.display = 'inline-block';
+            children[i].firstChild.lastChild.style.display = 'none';
+        }
         var helperContainerCoordinates = this.display.getBoundingClientRect();
         // console.log(helperContainerCoordinates);
         var displayWidth = this.container.offsetWidth;

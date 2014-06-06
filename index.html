@@ -117,9 +117,24 @@
                     body.onclick = function(event) {
                         var helpContainer = document.querySelector('.gk-helper-container');
                         var helpStyle = window.getComputedStyle(helpContainer, null);
-                        if (helpStyle.display !== 'none' && event.toElement.className.toString() !=='gk-helper-display')
+                        if (helpStyle.display !== 'none' && event.toElement.className.toString() !=='gk-helper-display' && event.target.parentElement.className.toString() !=='gk-helper-gesture')
                         {
                             helper.hideGestures();
+                        }
+                        else if(event.target.parentElement.className.toString() === 'gk-helper-gesture')
+                        {
+                            if (event.target.className.toString() === '')
+                            {
+                                event.target.style.display = 'none';
+                                event.target.nextSibling.style.display = 'inline-block';
+                                console.log(event);
+                            }
+                            else if (event.target.className.toString() === 'gk-helper-gestureDescription')
+                            {
+                                event.target.style.display = 'none';
+                                event.target.previousSibling.style.display = 'inline-block';
+                                console.log(event);   
+                            }
                         }
                     };
                   }
@@ -128,6 +143,7 @@
                   storage.setItem('gkcounter', count);
 
                 }(this, 2));
+
 
                 $(function() {
                     $(".gk-player-volume, .knob").knob({
