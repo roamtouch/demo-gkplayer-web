@@ -45,6 +45,7 @@
                 </div>
             </div>
         </div>
+        <div class="star-holder"></div>
         <script src="src/gesturekit.min.js"></script>
         <script src="src/gesturekit.helper.js"></script>
 
@@ -52,10 +53,18 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" ></script>
         <script src="src/jquery.knob.js"></script>
+        <script src="src/animations.js"></script>
 
         <script>
             window.onload = function () {
                 'use strict';
+                var imgSources = [];
+                imgSources.push('src/particles/p1.png');
+                imgSources.push('src/particles/p2.png');
+                imgSources.push('src/particles/p3.png');
+                imgSources.push('src/particles/p4.png');
+                var imgHolder = document.querySelector('.star-holder');
+                var animations = new TouchAnimation(imgSources, imgHolder);
                 var player = window.player = new Player({
                     'volume': 25,
                     'playlist': [{
@@ -98,6 +107,17 @@
                         })
                         .on('BACKWARD', function () {
                             player.prev();
+                        })
+                        .on('pointermove', function (event) {
+                            animations.generateImages(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                        })
+                        .on('notrecognize', function (event) {
+                            var recognized = true;
+                            animations.animateAndRemoveImages(recognized);
+                        })
+                        .on('recognize', function (event) {
+                            var recognized = false;
+                            animations.animateAndRemoveImages(recognized);
                         });
 
                         var $modal = $('.modal');
