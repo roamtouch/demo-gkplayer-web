@@ -2,8 +2,10 @@ function TouchAnimation(imagesSources, imgHolder){
 	this.imgHolder = imgHolder;
 	this.imagesSources = imagesSources;
 }
+var removeImages;
 
 TouchAnimation.prototype.generateImages = function(clientX, clientY){
+	clearTimeout(removeImages);
 	var x = Math.floor((Math.random() * this.imagesSources.length));
 	var particleImg	= document.createElement("img");
 	particleImg.setAttribute('src', this.imagesSources[x]);
@@ -13,11 +15,10 @@ TouchAnimation.prototype.generateImages = function(clientX, clientY){
 	this.imgHolder.appendChild(particleImg);
 }
 
-var removeImages;
 
 TouchAnimation.prototype.animateAndRemoveImages = function(recognizedGesture)
 {
-	clearTimeout(removeImages);
+	// clearTimeout(removeImages);
 	var particleImgs = document.getElementsByClassName('particle-img');
 	for(i=0; i<particleImgs.length; i++)
 	{

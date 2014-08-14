@@ -108,17 +108,17 @@
                         .on('BACKWARD', function () {
                             player.prev();
                         })
-                        .on('pointermove', function (event) {
-                            animations.generateImages(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-                        })
-                        .on('notrecognize', function (event) {
-                            var recognized = true;
-                            animations.animateAndRemoveImages(recognized);
-                        })
-                        .on('recognize', function (event) {
-                            var recognized = false;
-                            animations.animateAndRemoveImages(recognized);
-                        });
+                        // .on('pointermove', function (event) {
+                        //     animations.generateImages(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                        // })
+                        // .on('notrecognize', function (event) {
+                        //     var recognized = true;
+                        //     animations.animateAndRemoveImages(recognized);
+                        // })
+                        // .on('recognize', function (event) {
+                        //     var recognized = false;
+                        //     animations.animateAndRemoveImages(recognized);
+                        // });
 
                         var $modal = $('.modal');
 
