@@ -56,7 +56,6 @@
         }());
 
     function render(gesture) {
-        // console.log(gesture);
         return [
             '<div class="gk-helper-gesture-container">',
                 '<div class="gk-helper-gesture">',
@@ -473,19 +472,19 @@
         {
             // gather all stylesheets into an array
             var ss = document.styleSheets;
-            
+
             // loop through the stylesheets
             for (var i = 0; i < ss.length; ++i) {
-                
+
                 // loop through all the rules
                 for (var j = 0; j < ss[i].cssRules.length; ++j) {
-                    
+
                     // find the -webkit-keyframe rule whose name matches our passed over parameter and return that rule
                     if (ss[i].cssRules[j].type == window.CSSRule.WEBKIT_KEYFRAMES_RULE && ss[i].cssRules[j].name == rule)
                         return ss[i].cssRules[j];
                 }
             }
-            
+
             // rule not found
             return null;
         }
@@ -500,8 +499,6 @@
             // remove the existing 0% and 100% rules
             keyframes.deleteRule("from");
             keyframes.deleteRule("to");
-            console.log();
-            
 
 
             if(that.container.offsetWidth < 363)
@@ -524,7 +521,6 @@
                     }
                 }
                 endWidth = 240;
-                console.log(that.showroom.container.children);
                 that.showroom.container.style.height = 120 + 'px';
                 that.showroom.container.style.width = 240 + 'px';
             }
@@ -548,7 +544,6 @@
                     }
                 }
                 endWidth = 300;
-                console.log(that.showroom.container.children);
                 that.showroom.container.style.height = 120 + 'px';
                 that.showroom.container.style.width = 300 + 'px';
             }
@@ -563,7 +558,7 @@
                 keyframes.insertRule("from { width: " + startWidth + "px;}");
                 keyframes.insertRule("to { width: " + endWidth + "px;}");
             }
-            
+
             // assign the animation to our element (which will cause the animation to run)
         }
 
@@ -577,7 +572,7 @@
      * helper.showGestures();
      */
     Helper.prototype.showGestures = function () {
-        
+
         var children = this.showroom.container.children
         for (var i=0 ; i< children.length; i++)
         {
@@ -585,13 +580,11 @@
             children[i].firstChild.lastChild.style.display = 'none';
         }
         var helperContainerCoordinates = this.display.getBoundingClientRect();
-        // console.log(helperContainerCoordinates);
         var displayWidth = this.container.offsetWidth;
 
         if(this.currentOffset.x > displayWidth / 2)
         {
             var helperContainerCoordinates = this.display.getBoundingClientRect();
-            // console.log(helperContainerCoordinates);
             var newLeft = helperContainerCoordinates.left - 360;
             this.showroom.container.style.top = helperContainerCoordinates.top + 'px';
             this.showroom.container.style.left = newLeft + 'px';
@@ -607,7 +600,7 @@
             this.showroom.container.style.left = helperContainerCoordinates.left + 'px';
             change('gkHelper-animation-enter', 0, 0, this);
         }
-        
+
         this.showroom.container.style.display = 'block';
         gesturekit.disable();
 
